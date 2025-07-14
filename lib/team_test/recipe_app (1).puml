@@ -1,0 +1,108 @@
+@startuml
+'https://plantuml.com/class-diagram
+scale 0.7
+
+userModel --> userCredentials
+recipe --> recipeRepository
+review --> reviewRepository
+notification --> notificationRepository
+userCredentials --> AuthRepository
+userModel --> userRepository
+category --> recipe
+ingredient --> recipe
+
+interface userCredentials{
+    login()
+    createUser()
+}
+
+class snsCredential implements userCredentials{
+
+}
+
+class emailPasswordCredential implements userCredentials {
+}
+
+interface AuthRepository{
+    Future<Result<user, error>> tryLogin(userCredentials a)
+    Future<Result<user, error>> tryCreateUser(userCredentials a)
+}
+
+class userModel {
+    int id,
+    userCredentials a,
+    String name,
+    String occupation,
+    Geo area,
+    image picture,
+    int followers,
+    int[] followings
+}
+
+interface userRepository {
+    getUserById(int id)
+    getUsersByIds(int[] ids)
+}
+
+enum category {
+    chinese
+    japanese
+    korean
+}
+class recipe {
+    int id,
+    String title,
+    image image,
+    Set<category> categories,
+    time duration,
+    double rating,
+    int authorId,
+    dateTime createdAt,
+    String[] procedures
+    list<tuple(ingredient i, amount int)> ingredients
+}
+
+interface recipeRepository {
+    getRecipesByUserId(int id)
+    getAllRecipes({time: (newest, oldest), categories, rate, String keyword}})
+    createRecipe(recipeDTO recipe)
+}
+
+class ingredient {
+    int id,
+    String title,
+    image image
+}
+
+class review {
+    int id,
+    int creatorId,
+    int recipeId,
+    DateTime createdAt,
+    String content,
+    int[] likesList,
+    int[] dislikesList
+}
+
+interface reviewRepository {
+    createReview(reviewDTO review)
+    getReviewsByRecipeId(int id)
+    getReviewsByUserId(int id)
+    getReviewsCountByRecipeId(int id)
+    updateLikesDislikes(enum(like, dislike), userId, recipeId)
+}
+
+class notification {
+    int id,
+    String title,
+    String content,
+    DateTime createdAt,
+    bool read
+}
+
+interface notificationRepository {
+    getAllNotificationByUserId(int id, {bool read})
+    updateReadNotification(int id)
+}
+
+@enduml

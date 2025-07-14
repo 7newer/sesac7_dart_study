@@ -378,3 +378,20 @@ extention을 사용하면 활용도가 좋다
 외부라이브러리는 그냥쓰지말고 인터페이스로 빼서 사용하도록
 
 mixin도 인터페이스라 보면된다.
+
+
+앱 안에 라이센스 고지 -> 필수는 아니지만 고지를 해야함 - 플러터는 라이브러리 사용해서 뚝딱뚝딱 만듬
+(선생님) 오준석 — 오후 3:46
+https://api.flutter.dev/flutter/material/showLicensePage.html
+페이지가 뚝딱 만들어짐
+
+git 브렌치 사용방법
+
+https://backlog.com/ja/git-tutorial/stepup/01/
+
+곁치지않도록 잘 나누어야해
+
+
+
+브랜치 준비!!
+
